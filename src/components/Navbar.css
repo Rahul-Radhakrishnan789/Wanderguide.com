@@ -1,0 +1,19 @@
+.navbar{
+    height:75px
+}
+.transparent-button {
+   
+    background-color: transparent;
+    width: 90px;
+    height: 40px;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: #fff;
+    color: #fff;
+    opacity: 0.8;
+  }
+  
+  .transparent-button:hover {
+    opacity: 1; 
+  }
+  
