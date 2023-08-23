@@ -9,10 +9,35 @@ import axios from 'axios';
 
 export const Loginpage = () => {
 
-  const handleCallbackResponse = (response) => {
+  const navigate = useNavigate()
+
+  const [,setUser] = useState({})
+
+ 
+
+
+  const handleCallbackResponse = async (response) => {
+   
    console.log("Encoded JWT ID token :" + response.credential)
+  
    var userObject = jwt_decode(response.credential)
    console.log(userObject)
+   setUser(userObject)
+
+
+   const token1 = response.credential
+   
+   localStorage.setItem('authToken1', token1);
+   
+   if(token1){
+    navigate('/')
+   }
+   else{
+    console.log("something is wrong");
+   }
+   
+    
+
   }
 
   useEffect(() => {
@@ -26,11 +51,14 @@ export const Loginpage = () => {
       {theme:"outline",size:"large"}
     );
 
-  },[])
+    google.accounts.id.prompt()
+    
+  })
 
 
 
-  const navigate = useNavigate()
+ 
+
   const [signinValues, setSigninValues] = useState({
     userName: '',
     password: ''

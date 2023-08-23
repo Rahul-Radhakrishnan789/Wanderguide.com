@@ -24,7 +24,7 @@ export const Navx = () => {
                 <Nav.Link className='px-3'>Pricing</Nav.Link>
               </Nav>
               <Nav className="px-5">
-                <Nav.Link className='px-3'>Contact now</Nav.Link>
+                <Nav.Link onClick={() => navigate("/hotelownerlogin")} className='px-3'>Merchant</Nav.Link>
                 <Nav.Link className='px-3'>Cart</Nav.Link>
                 <Nav.Link onClick={() => navigate("/loginpage")} className='px-3'>Login</Nav.Link>
               </Nav>
