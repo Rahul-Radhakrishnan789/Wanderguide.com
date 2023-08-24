@@ -1,14 +1,13 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 
 export const HotelOwnerLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+ 
+ 
 
  const Navigate = useNavigate()
 
@@ -16,24 +15,12 @@ export const HotelOwnerLogin = () => {
     const envUsername = process.env.REACT_APP_USERNAME;
     const envPassword = process.env.REACT_APP_PASSWORD ;
     if (username === envUsername && password === envPassword) {
-      setIsLoggedIn(true);
-      setShowModal(true)
-      setTimeout(() => {
-        setShowModal(false);
-      }, 2000);
-      Navigate("")
+
+      Navigate("/hotelownerhomepage")
     }
-    else{
-      setShowModal(false);
-    }
+
     };
 
-    useEffect(() => {
-      
-      return () => {
-        clearTimeout();
-      };
-    }, []);
 
   return (
     <div className="container mt-5" style={{ width: '400px' }}>
@@ -63,13 +50,8 @@ export const HotelOwnerLogin = () => {
           Login
         </Button>
       </Form>
-      {isLoggedIn && (
-        <Modal show={showModal}>
-          <Modal.Body>
-            <p>Login successful!</p>
-          </Modal.Body>
-        </Modal>
-      )}
+     
+   
     </div>
   );
 };
