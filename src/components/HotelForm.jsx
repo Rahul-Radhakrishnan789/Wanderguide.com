@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Sidebar } from './Sidebar';
+import axios from 'axios';
 import './HotelForm.css'
 
 export const HotelForm = () => {
@@ -10,31 +11,54 @@ export const HotelForm = () => {
     price: '',
     amenities: [],
     availableRooms: '',
-    bookedRooms: '',
     propertyType: '',
     images: [],
   });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    if (name === 'amenities') {
+      setFormData({
+        ...formData,
+        amenities: value.split(',')
+      });
+    }
+    else{
     setFormData({
       ...formData,
       [name]: value
     });
+  }
   };
 
   
   const handleImageUpload = (event) => {
-    const files = Array.from(event.target.files);
+    const files = event.target.files;
     setFormData({
       ...formData,
-      images: files.slice(0, 5) 
+      images: files
     });
   };
+  
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(formData);
+  
+
+    try{
+
+     const response = await axios.post('http://localhost:2000/api/hotelowner/addhotel',formData)
+
+     console.log('Registration successful:', response.data.message);
+
+    }
+    catch (error) {
+      console.error('Registration error:', error);
+      console.log('Response:' , error.response);
+    
+  }
+  
    
   };
 
@@ -115,9 +139,9 @@ export const HotelForm = () => {
         <Form.Group controlId="images">
           <Form.Label className='image-upload-label'>Upload Images</Form.Label>
           <Form.Control
+           accept=".png, .jpg, .jpeg"
             type="file"
             name="images"
-            accept="image/*"
             multiple
             onChange={handleImageUpload}
           />
