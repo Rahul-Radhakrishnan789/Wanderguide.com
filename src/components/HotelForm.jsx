@@ -48,8 +48,21 @@ export const HotelForm = () => {
 
     try{
 
-     const response = await axios.post('http://localhost:2000/api/hotelowner/addhotel',formData)
+      const formDataToSend = new FormData()
 
+
+      for (const key in formData) {
+      if (key === 'images') {
+        for (let i = 0; i < formData.images.length; i++) {
+          formDataToSend.append('images', formData.images[i]);
+        }
+      } else {
+        formDataToSend.append(key, formData[key]);
+      }
+    }
+
+    const response = await axios.post('http://localhost:2000/api/hotelowner/addhotel',formDataToSend)
+ 
      console.log('Registration successful:', response.data.message);
 
     }
@@ -67,7 +80,7 @@ export const HotelForm = () => {
         <Sidebar/>
     <div className="form-container container mt-5" style={{width:'500px'}}>
       <h2 className='form-title'>Add Hotel Information</h2>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} >
         <Form.Group controlId="hotelName">
           <Form.Label>Hotel Name</Form.Label>
           <Form.Control

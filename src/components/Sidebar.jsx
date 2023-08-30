@@ -12,7 +12,7 @@ export const Sidebar = () => {
      <div>
     <div className="sidebar">
       <Nav defaultActiveKey="/home" className="flex-column">
-        <Nav.Link onClick={() => nav('/')} >Home</Nav.Link>
+        <Nav.Link onClick={() => nav('/')} >Back To Home</Nav.Link>
         <Nav.Link onClick={() => nav('/ownerhotel')}>Your Hotels</Nav.Link>
         <Nav.Link onClick={()=> nav('/hotelform')}>Create a Hotel</Nav.Link>
       </Nav>
