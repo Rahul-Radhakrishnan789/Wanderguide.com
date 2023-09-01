@@ -6,8 +6,8 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { InputGroup } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-
+// import axios from 'axios'
+import axios from '../utils/AxiosInstance'
 
 export const RegistrationPage = () => {
 
@@ -24,7 +24,7 @@ export const RegistrationPage = () => {
     event.preventDefault();
 
     try {
-        const response = await axios.post('http://localhost:2000/api/users/register',
+        const response = await axios.post('/api/users/register',
         {
             userName:loginValues.userName,
             email:loginValues.email,

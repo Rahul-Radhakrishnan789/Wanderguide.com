@@ -13,6 +13,7 @@ export const HotelForm = () => {
     availableRooms: '',
     propertyType: '',
     images: [],
+    state:''
   });
 
   const handleInputChange = (event) => {
@@ -101,6 +102,16 @@ export const HotelForm = () => {
             required
           />
         </Form.Group>
+        <Form.Group controlId="hotelName">
+          <Form.Label>State</Form.Label>
+          <Form.Control
+            type="text"
+            name="state"
+            value={formData.state}
+            onChange={handleInputChange}
+            required
+          />
+           </Form.Group>
         <Form.Group controlId="price">
           <Form.Label>Price per Night</Form.Label>
           <Form.Control

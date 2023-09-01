@@ -5,7 +5,8 @@ import { Nav } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode"
-import axios from 'axios';
+// import axios from 'axios';
+import axios from '../utils/AxiosInstance'
 
 export const Loginpage = () => {
 
@@ -78,7 +79,7 @@ export const Loginpage = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:2000/api/users/login', signinValues);
+      const response = await axios.post('/api/users/login', signinValues);
       const token = response.data.data;
       console.log('Login successful:', response.data.message);
       console.log(token )
