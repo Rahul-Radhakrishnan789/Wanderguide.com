@@ -3,7 +3,7 @@
     align-items: center;
     padding: 20px;
     border: 1px solid #ccc;
-    margin-bottom: 20px;
+    margin-bottom: 20px;;
   }
   
   .image-container {
@@ -25,5 +25,23 @@
     margin-top: 10px;
   }
   
-  /* Add more styles as needed */
+  .button-container {
+    margin-top: 20px; /* Add margin to separate the buttons from other content */
+  }
+  
+  .edit-button,
+  .delete-button {
+    margin-right: 20px; 
+    padding: 10px 20px; 
+    background-color: #007bff;
+    color: #fff; 
+    border: none; 
+    cursor: pointer;
+  }
+  
+  .edit-button:hover,
+  .delete-button:hover {
+    background-color: #0056b3; /* Button background color on hover */
+  }
+  
   

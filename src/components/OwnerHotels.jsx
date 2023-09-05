@@ -26,17 +26,37 @@ export const OwnerHotels = () => {
        hotelsData()
    },[])
 
-   useEffect(() => {
-    console.log('Updated hotels:', hotels);
-  }, [hotels]);
+   
+
+
+  const handleHotelDelete = (hotelId) => {
+    
+    const updatedHotelData = hotels.filter((hotel) => hotel._id !== hotelId);
+    setHotels(updatedHotelData);
+  };
+
+  const handleHotelEdit = (hotelId, updatedData) => {
+    const updatedHotelData = hotels.map((hotel) => {
+      if (hotel._id === hotelId) {
+        return { ...hotel, ...updatedData };
+      }
+      return hotel;
+    });
+    setHotels(updatedHotelData);
+  };
   
 
   return (
     <div >
      <Sidebar/>
      <div className="row" style={{marginLeft:'250px'}}>
-        {hotels.map((hotel, index) => (
-          <HotelCard key={index} hotel={hotel} />
+        {hotels.map((hotel) => (
+          <HotelCard
+           key={hotel._id}
+           hotel={hotel}
+           onDelete={handleHotelDelete}
+           onEdit={handleHotelEdit} 
+           />
         ))}
       </div>
         </div>

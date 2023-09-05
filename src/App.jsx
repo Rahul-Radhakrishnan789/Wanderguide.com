@@ -6,6 +6,9 @@ import {HotelOwnerLogin}  from './pages/HotelOwnerPages/HotelOwnerLogin'
 import { HotelOwnerHomePage } from './pages/HotelOwnerPages/HotelOwnerHomePage';
 import { OwnerHotels } from './components/OwnerHotels';
 import { HotelForm } from './components/HotelForm';
+import { Mapbox } from './components/Mapbox';
+
+
 import './App.css';
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
                  <Route path='/hotelownerhomepage' element={<HotelOwnerHomePage/>}/>
                  <Route path='/ownerhotel' element={<OwnerHotels/>} />
                  <Route path='/hotelform' element={<HotelForm/>} />
+                 <Route path='/mapbox' element={<Mapbox/>} />
            </Routes>
       </Router>
  
