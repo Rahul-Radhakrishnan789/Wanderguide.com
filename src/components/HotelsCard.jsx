@@ -80,7 +80,7 @@ export const HotelCard = ({ hotel,onDelete,onEdit }) => {
         {hotel.images.map((image, index) => (
           <img
             key={index}
-            src={`http://localhost:2000/${image.path}`}
+            src={image.url}
             alt={image.originalname}
             className="hotel-image"
           />

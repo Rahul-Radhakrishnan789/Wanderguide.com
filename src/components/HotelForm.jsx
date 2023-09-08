@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Sidebar } from './Sidebar';
 import axios from 'axios';
+import { Mapbox } from './Mapbox';
+import { useSelector } from 'react-redux';
 import './HotelForm.css'
 
 export const HotelForm = () => {
+
+  const { longitude, latitude } = useSelector((state) => state.coordinates);
+
   const [formData, setFormData] = useState({
     hotelName: '',
     location: '',
@@ -13,7 +18,8 @@ export const HotelForm = () => {
     availableRooms: '',
     propertyType: '',
     images: [],
-    state:''
+    state:'',
+
   });
 
   const handleInputChange = (event) => {
@@ -28,7 +34,7 @@ export const HotelForm = () => {
     setFormData({
       ...formData,
       [name]: value
-    });
+    }) 
   }
   };
 
@@ -59,13 +65,15 @@ export const HotelForm = () => {
         }
       } else {
         formDataToSend.append(key, formData[key]);
+        formDataToSend.append('longitude',longitude);
+        formDataToSend.append('latitude',latitude);
       }
     }
 
     const response = await axios.post('http://localhost:2000/api/hotelowner/addhotel',formDataToSend)
  
      console.log('Registration successful:', response.data.message);
-
+       console.log(response)
     }
     catch (error) {
       console.error('Registration error:', error);
@@ -170,6 +178,17 @@ export const HotelForm = () => {
             onChange={handleImageUpload}
           />
         </Form.Group>
+        <Form.Group controlId="location">
+        <Form.Label>Location</Form.Label>
+              <Mapbox />
+        {/* Display the selected location */}
+        <div>
+          Selected Location:
+          <span>
+            {/* Latitude: {formData.geoLocation.latitude}, Longitude: {formData.geoLocation.longitude} */}
+          </span>
+        </div>
+      </Form.Group>
    
         <Button className="submit-button" variant="primary" type="submit">
           Add Hotel

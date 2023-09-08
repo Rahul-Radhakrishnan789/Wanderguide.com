@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
 import { MapPin } from 'phosphor-react';
+import { useDispatch } from 'react-redux';
+import { setCoordinates } from '../Redux Store/slices/coordinateSlice';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const Mapbox = () => {
+
+  const dispatch = useDispatch()
+
   const [viewport, setViewport] = useState({
-    latitude: 37.7577,
-    longitude: -122.4376,
-    zoom: 10  ,
+    latitude: 20.5937,
+    longitude: 78.9629,
+    zoom: 5,
   });
 
   const [marker, setMarker] = useState(null);
@@ -21,13 +26,15 @@ export const Mapbox = () => {
         latitude: lat,
         longitude: lng,
       });
+      dispatch(setCoordinates({ longitude: lng, latitude: lat }));
     }
-    console.log(marker)
+   
   };
 
 
+
   return (
-    <div style={{ width: '900p', height: '560px' ,}}>
+    <div style={{  height: '560px'}}>
       <ReactMapGL
         initialViewState={viewport}
         width="100vw"
@@ -40,7 +47,7 @@ export const Mapbox = () => {
        
         
       >
-        {marker && (
+        {marker ? (
           <Marker
             latitude={marker.latitude}
             longitude={marker.longitude}
@@ -51,7 +58,7 @@ export const Mapbox = () => {
           >
             <div><MapPin size={22} style={{color:'red'}}/></div>
           </Marker>
-        )}
+        ) : null }
       </ReactMapGL>
     </div>
   );

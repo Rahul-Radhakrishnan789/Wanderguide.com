@@ -1,6 +1,13 @@
-import React from 'react'
+import React,{useState  } from 'react'
+import {MagnifyingGlass} from 'phosphor-react'
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import {Button} from 'react-bootstrap';
 import { Container, Row, Col } from 'react-bootstrap';
 import { DestinationCard } from './DestinationCard';
+import axios from '../utils/AxiosInstance'
+import { fetchHotels } from '../Redux Store/slices/hotelSlice';
+import { useDispatch } from 'react-redux';
 import kochi from '../assets/images/goa.jpg'
 import delhi from '../assets/images/delhi.jpg'
 import mumbai from '../assets/images/mumbai.jpg'
@@ -13,7 +20,7 @@ import himachal from '../assets/images/himachalpradesh.jpg'
 import kashmir  from '../assets/images/kashmir.jpg'
 import karnataka from '../assets/images/karnataka.jpg'
 import meghalaya from '../assets/images/meghalaya.jpg'
-// import pune from "../assets/images/pune.jpg"
+
 
 
 
@@ -24,7 +31,7 @@ const destinations = [
   { name: 'Hyderabad', accommodations: '2,678 accommodations', image: hyderabad },
   { name: 'Chennai', accommodations: '2,774 accommodations', image: chennai },
   { name: 'Kochi', accommodations: '1,054 accommodations', image: kochi },
-  // { name: 'Pune', accommodations: '2,025 accommodations', image: pune }
+
 
 ];
 
@@ -38,8 +45,61 @@ const states = [
 ];
 
 export const MainPage = () => {
+
+  const dispatch = useDispatch()
+
+  const [destination, setDestination] = useState('');
+
+  const [hotels,setHotels] = useState([])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try{
+   
+
+    const response = await axios.get(`/api/users/searchhotels?location=${destination}`)
+
+    const responseData = response.data.data;
+
+    if(responseData){
+            setHotels(responseData)
+            setDestination('')
+    }
+
+    dispatch(fetchHotels(hotels))
+ 
+    }
+    catch(error){
+      console.error('Error fetching hotels:', error);
+    }
+  };
+
+
+
   return (
-    <div>
+    <div >
+<Form>
+      <div  style={{display:'flex' ,alignItems:'center',justifyContent:'start'}}>
+
+     <FloatingLabel
+        controlId="floatingInput"
+        label="Enter Your Destination"
+        className="mb-5 mt-5 "
+        style={{width:'300px' , marginLeft:'38%'}}
+      >
+        <Form.Control
+         type="text"
+         placeholder="Enter Your Destination" 
+         value={destination}
+         onChange={(e) => setDestination(e.target.value)}
+        />
+
+      </FloatingLabel>
+
+       <Button variant='success' type="submit" style={{height:'55px',marginLeft:'10px'}} className="mb-5 mt-5 " onClick={handleSubmit}><MagnifyingGlass size={28} /></Button>
+
+       </div>
+       </Form>
     <div>
         <div style={{marginTop:"14px"}}><h3> Top City in India</h3></div>
     <div style={{marginTop:'10px',width:'80%'}}>
