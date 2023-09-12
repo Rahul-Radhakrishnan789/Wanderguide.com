@@ -19,7 +19,7 @@ export const Navx = () => {
             <Container>
               <Navbar.Brand ><img src={Logo} alt="Logo" width={200}/> </Navbar.Brand>
               <Nav className="me-auto">
-                <Nav.Link className='px-3' >Home</Nav.Link>
+                <Nav.Link className='px-3' onClick={() =>  navigate('/') } >Home</Nav.Link>
                 <Nav.Link className='px-3'>Hotels</Nav.Link>
                 <Nav.Link className='px-3'>Pricing</Nav.Link>
               </Nav>

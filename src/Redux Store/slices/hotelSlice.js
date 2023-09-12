@@ -1,16 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  hotels: [],
-};
+    hotels:[]
+}
 
 const hotelSlice = createSlice({
   name: 'hotels',
   initialState:initialState,
   reducers: {
     fetchHotels: (state, action) => {
-      state.hotels = action.payload;
-      console.log('what the heck',state.hotels)
+        console.log("data in redux store:",fetchHotels())
+        return { ...state, hotels:action.payload };
+        
+      
     },
   },
 });

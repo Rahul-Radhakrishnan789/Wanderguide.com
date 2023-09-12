@@ -1,0 +1,100 @@
+
+.hotel-image-section {
+    width: 250px;
+    height: 270px;
+    background: yello;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .hotel-image {
+    width: 242px;
+    height: 200px;
+    margin: 2px;
+    border-radius: 10px;
+  }
+  
+  .hotel-thumbnail-container {
+    display: flex;
+  }
+  
+  .hotel-thumbnail {
+    width: 58px;
+    height: 60px;
+    margin: 2px;
+    border-radius: 10px;
+  }
+  
+
+  .hotel-info-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 500px;
+    background: rd;
+    border-radius: 10px;
+    padding-left: 20px;
+  }
+
+  .hotel-item{
+    display: flex;
+  }
+  
+
+.flex-container {
+    display: flex;
+  }
+  
+  .amenity-box {
+    margin-right: 10px;
+    border: 1px solid #863a3a;
+    padding: 1px;
+  }
+  
+  .propertytype-container{
+    background-color: rgb(228, 231, 213);
+    margin-bottom: 10px;
+    
+  }
+
+  .hotel-list :hover{
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+
+.rooms-available{
+    padding-top: 20px;
+    color: rgb(14, 197, 14);
+}
+
+.noroom-availabe{
+    padding-top: 20px;
+    color: red;
+}
+
+.heart{
+    border:none;
+    background: inherit;
+    margin: 5px;
+    height:40px;
+}
+
+.heart:hover{
+    color: red;
+}
+
+
+.heart.active {
+    color: red; /* Color when active (in wishlist) */
+  }
+
+
+.price-details{
+    margin-left: 300px;
+    margin-bottom: 20px;
+    color: rgb(222, 44, 13);
+    display :flex;
+
+}

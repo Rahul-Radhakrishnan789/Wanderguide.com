@@ -165,7 +165,13 @@ export const HotelForm = () => {
             <option value="Resort">Resort</option>
             <option value="Motel">Motel</option>
             <option value="Guest House">Guest House</option>
-            <option value="Other">Other</option>
+            <option value="Hostel">Hostel</option>
+            <option value='Entire apartment'>Entire apartment</option>
+            <option value="Homestay">Homestay</option>
+            <option value="Tent">Tent</option>
+            <option value="Farm stay">Farm stay</option>
+            <option value="Entire bungalow">Entire bungalow</option>
+            <option value="Bed and breakfast">Bed and breakfast</option>
           </Form.Control>
         </Form.Group>
         <Form.Group controlId="images">

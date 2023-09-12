@@ -8,6 +8,7 @@ import { DestinationCard } from './DestinationCard';
 import axios from '../utils/AxiosInstance'
 import { fetchHotels } from '../Redux Store/slices/hotelSlice';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import kochi from '../assets/images/goa.jpg'
 import delhi from '../assets/images/delhi.jpg'
 import mumbai from '../assets/images/mumbai.jpg'
@@ -46,14 +47,15 @@ const states = [
 
 export const MainPage = () => {
 
+  const navigate= useNavigate()
+
   const dispatch = useDispatch()
 
   const [destination, setDestination] = useState('');
 
-  const [hotels,setHotels] = useState([])
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try{
    
 
@@ -62,11 +64,14 @@ export const MainPage = () => {
     const responseData = response.data.data;
 
     if(responseData){
-            setHotels(responseData)
+          
             setDestination('')
+            dispatch(fetchHotels(responseData))
+            navigate('displayhotels')
+            console.log('data arrived:',responseData)
     }
 
-    dispatch(fetchHotels(hotels))
+    
  
     }
     catch(error){

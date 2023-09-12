@@ -76,13 +76,13 @@ export const HotelCard = ({ hotel,onDelete,onEdit }) => {
   return (
     
     <div className="hotel-card" >
-      <div className="image-container">
+      <div className="image-containerr">
         {hotel.images.map((image, index) => (
           <img
             key={index}
             src={image.url}
             alt={image.originalname}
-            className="hotel-image"
+            className="hotel-images"
           />
         ))}
       </div>
@@ -91,7 +91,7 @@ export const HotelCard = ({ hotel,onDelete,onEdit }) => {
         <p>
           <strong>Location:</strong> {hotel.location}, {hotel.state}<br />
           <strong>Price:</strong> ${hotel.price} per night<br />
-          <strong>Amenities:</strong> {hotel.amenities.join(', ')}<br />
+          <strong>Amenities:</strong> {hotel.amenities}<br />
           <strong>Available Rooms:</strong> {hotel.availableRooms}<br />
           <strong>Property Type:</strong> {hotel.propertyType}
         </p>

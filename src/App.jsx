@@ -6,6 +6,7 @@ import {HotelOwnerLogin}  from './pages/HotelOwnerPages/HotelOwnerLogin'
 import { HotelOwnerHomePage } from './pages/HotelOwnerPages/HotelOwnerHomePage';
 import { OwnerHotels } from './components/OwnerHotels';
 import { HotelForm } from './components/HotelForm';
+import {DisplayHotels} from './pages/DisplayHotels'
 import { Mapbox } from './components/Mapbox';
 
 
@@ -23,6 +24,7 @@ function App() {
                  <Route path='/ownerhotel' element={<OwnerHotels/>} />
                  <Route path='/hotelform' element={<HotelForm/>} />
                  <Route path='/mapbox' element={<Mapbox/>} />
+                 <Route path='/displayhotels' element={<DisplayHotels/> }/>
            </Routes>
       </Router>
  
