@@ -8,6 +8,8 @@ import { OwnerHotels } from './components/OwnerHotels';
 import { HotelForm } from './components/HotelForm';
 import {DisplayHotels} from './pages/DisplayHotels'
 import { Mapbox } from './components/Mapbox';
+import { Wishlist } from './components/Wishlist';
+import { HotelPage } from './pages/HotelPage';
 
 
 import './App.css';
@@ -25,6 +27,8 @@ function App() {
                  <Route path='/hotelform' element={<HotelForm/>} />
                  <Route path='/mapbox' element={<Mapbox/>} />
                  <Route path='/displayhotels' element={<DisplayHotels/> }/>
+                 <Route path='/wishlist' element={<Wishlist/>} />
+                 <Route path='/hotelpage/:paramid' element={<HotelPage/>}/>
            </Routes>
       </Router>
  

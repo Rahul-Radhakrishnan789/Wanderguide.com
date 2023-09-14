@@ -48,8 +48,7 @@
   
   .amenity-box {
     margin-right: 10px;
-    border: 1px solid #863a3a;
-    padding: 1px;
+    border:1px solid #e1bcbc; 
   }
   
   .propertytype-container{
@@ -81,9 +80,7 @@
     height:40px;
 }
 
-.heart:hover{
-    color: red;
-}
+
 
 
 .heart.active {

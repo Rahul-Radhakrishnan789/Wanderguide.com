@@ -9,7 +9,6 @@ const hotelSlice = createSlice({
   initialState:initialState,
   reducers: {
     fetchHotels: (state, action) => {
-        console.log("data in redux store:",fetchHotels())
         return { ...state, hotels:action.payload };
         
       

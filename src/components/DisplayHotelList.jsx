@@ -1,26 +1,50 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AnchorSimple } from 'phosphor-react';
 import {Heart} from 'phosphor-react'
+import axios from '../utils/AxiosInstance'
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem, removeItem } from '../Redux Store/slices/wishlistSlice';
+import { useNavigate } from 'react-router-dom';
+
 import './Displayhotellist.css'
 
 export const DisplayHotelList = ({ data }) => {
 
-    const [wishList, setWishList] = useState([])
+    const wishlistItems = useSelector((state) => state.wishlist.items)
+
+   const nav = useNavigate()
+
+    const dispatch = useDispatch()
+
+    const userId = localStorage.getItem('authUserId')
+
+   
 
     const handleWishlist = async(hotelId) => {
         
         try {
-            if (wishList.includes(hotelId)) {
-              // Remove from the wishlist locally
-              setWishList(wishList.filter((id) => id !== hotelId));
+            if (wishlistItems.includes(hotelId)) {
+             
+                dispatch(removeItem(hotelId))
           
-              // Remove from the backend
+        const response = await axios.delete(`/api/users/removefromwishlist/${userId}`,{
+           data: {hotelid:hotelId},
+        })
+
+        console.log(response)
+
              
             } else {
-              // Add to the wishlist locally
-              setWishList([...wishList, hotelId]);
+            
+             dispatch(addItem(hotelId))
+
+              const response = await axios.post(`/api/users/addtowishlist/${userId}`, {
+                hotelId: hotelId,
+              });
          
-              // Add to the backend
+              console.log(response)
+            
+             
              
             }
           } catch (error) {
@@ -30,7 +54,7 @@ export const DisplayHotelList = ({ data }) => {
     }
     
   return (
-    <div  >
+    <div >
       <div className="hotel-list" >
         {data.map((hotel) => (
           <div key={hotel._id} className="col mt-5" style={{border:'solid 1px',borderColor:'rgb(180,180,180)', borderRadius:'10px'}}>
@@ -52,7 +76,7 @@ export const DisplayHotelList = ({ data }) => {
                   </div>
                 </div>
               </div>
-              <div className="hotel-info-section">
+              <div className="hotel-info-section" onClick={() => nav(`/hotelpage/${hotel._id}`)}>
                 <div>
                   <h4>{hotel.hotelName}</h4>
             </div>
@@ -89,7 +113,7 @@ export const DisplayHotelList = ({ data }) => {
             </div>
                 
               </div>
-             <button className={`heart ${wishList.includes(hotel._id) ? 'active' : ''}`} 
+             <button className={`heart ${wishlistItems.includes(hotel._id) ? 'active' : ''}`} 
              onClick={() => handleWishlist(hotel._id)}
               ><Heart size={32}/></button>
             

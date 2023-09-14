@@ -5,10 +5,10 @@ import { Nav } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode"
-// import axios from 'axios';
 import axios from '../utils/AxiosInstance'
 
 export const Loginpage = () => {
+
 
   const navigate = useNavigate()
 
@@ -80,10 +80,16 @@ export const Loginpage = () => {
 
     try {
       const response = await axios.post('/api/users/login', signinValues);
-      const token = response.data.data;
-      console.log('Login successful:', response.data.message);
-      console.log(token )
+      const token = response.data.data.token;
+      const userId = response.data.data.userId
+
     
+
+      console.log('Login successful:', response.data.message);
+      console.log(token,userId )
+
+
+      localStorage.setItem('authUserId',userId)
       localStorage.setItem('authToken', token);
     
       if (token) {
