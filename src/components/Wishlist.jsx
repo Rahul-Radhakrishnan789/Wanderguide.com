@@ -16,12 +16,12 @@ export const Wishlist = () => {
     
             console.log(response.data.data)
     
-           const data = response.data.data
+          setData(response.data.data)
     
-           setData(data)
+         
      }
              displayhotels()
-    },[data])
+    },[])
 
     
 
