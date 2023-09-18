@@ -9,7 +9,7 @@ export const store = configureStore({
     reducer:{
       coordinates:coordinateReducer,
       hotel:hotelReducer,
-      wishlist:wishlistReducer
+      wishlist:wishlistReducer,
     
     }
 })

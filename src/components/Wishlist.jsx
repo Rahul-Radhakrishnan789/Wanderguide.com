@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from '../utils/AxiosInstance'
+import {SmileyMeh} from 'phosphor-react'
 import { DisplayHotelList } from './DisplayHotelList';
 
 
@@ -31,10 +32,13 @@ export const Wishlist = () => {
         <DisplayHotelList data={data}/>
     </div>
     ) :
-    (
-       <div style={{margin:'250px'}}>
+    (  
+      <div style={{display:'flex'}}>
+       <div style={{padding:'250px'}}>
        <b>Your wishlist is empty</b>
        </div> 
+       <div style={{paddingTop:'100px'}}><SmileyMeh size={300} /></div>
+       </div>
     )
     
   )

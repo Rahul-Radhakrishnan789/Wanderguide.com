@@ -10,6 +10,7 @@ import {DisplayHotels} from './pages/DisplayHotels'
 import { Mapbox } from './components/Mapbox';
 import { Wishlist } from './components/Wishlist';
 import { HotelPage } from './pages/HotelPage';
+import { PaymentPage } from './pages/PaymentPage';
 
 
 import './App.css';
@@ -29,6 +30,7 @@ function App() {
                  <Route path='/displayhotels' element={<DisplayHotels/> }/>
                  <Route path='/wishlist' element={<Wishlist/>} />
                  <Route path='/hotelpage/:paramid' element={<HotelPage/>}/>
+                 <Route path='/paymentpage' element={<PaymentPage/>} />
            </Routes>
       </Router>
  
