@@ -38,7 +38,7 @@ export const HotelPage = () => {
 
   const reviewInputRef = useRef(null);
   console.log(hotel)
-  // console.log(endDate)
+  // console.log('endDtate',endDate)
   // console.log('startDate',typeof(startDate))
   // console.log('endDate',typeof(endDate))
   // console.log(numRooms)
@@ -53,7 +53,7 @@ const addReview = async () => {
 try{
   const userId =  localStorage.getItem('authUserId')
 
-  const hotelId = hotel._id
+  const hotelId = hotel?._id
   console.log('hotelId',hotelId)
 
   const reviewTosend = {
@@ -80,6 +80,7 @@ catch(error){
 
   const sendDetails = async() => {
     try{
+      const hotelId = hotel?._id
 
      const userId = localStorage.getItem('authUserId')
 
@@ -90,9 +91,11 @@ catch(error){
         numberOfGuests:numPeople,
       }
      
-      const response = await axios.post(`/api/users/hotelbooking/${userId}`,dataToSend)
+      const response = await axios.post(`/api/users/hotelbooking/${userId}/${hotelId}`,dataToSend)
 
   console.log(response.data.data)
+
+  localStorage.setItem('bookingId',response.data.data)
 
   navigate('/paymentpage')
     }

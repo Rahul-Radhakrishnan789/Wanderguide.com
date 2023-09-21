@@ -1,0 +1,102 @@
+.payment-details{
+    border-bottom: 1px solid #ccc;
+}
+
+.payers-info{
+    display: flex   ;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 30px;
+    margin-left: 150px;
+    width: 900px;
+    height:150px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to bottom, #cc66ff 0%, #3366ff 100%);
+    
+    
+}
+
+.heding{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #ccc;
+    color: #fff;
+   
+}
+
+.checkout-details{
+    display: flex;
+    justify-content:space-around ;
+    color: #ccc;
+}
+
+.list-details{
+    margin-top: 30px;
+    width: 400px;
+ 
+
+}
+
+.divStyle{
+    margin-top: 30px;
+    background-color: '#f0f0f0';
+    width: 500px;
+    height: 200px;
+    padding: 20px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+   
+}
+
+.divStyle ul {
+    list-style-type: disc;
+    padding-Left: 20px;
+}
+
+.left-side{
+    display: flex;
+}
+
+.right-side{
+    width: 500px;
+    height: 200px;
+    margin-top: 30px;
+    margin-left: 150px;
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border:1px solid #ccc;
+   
+}
+
+.price-1{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.payment-end{
+    width: 500px;
+    height: 200px;
+    margin-left: -40px;
+    margin-top: 30px;
+    background-color: red;
+}
+
+.payment-button {
+    margin-left: 200px;
+    margin-top: 30px;
+    box-shadow:  2px 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 250px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(to bottom, #66ff99 0%, #6666ff 100%);
+}
+
+
+
+  

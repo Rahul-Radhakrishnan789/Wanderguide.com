@@ -96,20 +96,6 @@ export const HotelCard = ({ hotel,onDelete,onEdit }) => {
           <strong>Property Type:</strong> {hotel.propertyType}
         </p>
         <div className="card-reviews">
-          <h6>Reviews:</h6>
-          {hotel.reviews.length === 0 ? (
-            <p>No reviews available.</p>
-          ) : (
-            <ul>
-              {hotel.reviews.map((review, index) => (
-                <li key={index}>
-                  <strong>{review.username}</strong><br />
-                  <strong>Rating:</strong> {review.rating}<br />
-                  {review.reviewText}
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
         <div className="button-container">
   <button className="edit-button" onClick={handleEditClick}>Edit</button>
