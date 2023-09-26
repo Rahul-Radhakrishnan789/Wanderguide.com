@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Navx } from '../components/Navbar'
 import axios from '../utils/AxiosInstance'  
+import { useNavigate } from 'react-router-dom'
 import './PaymentPage.css'
 
 
 export const PaymentPage = () => {
 
+ const navigate = useNavigate();
 
  const [bookingData,setBookingData] = useState([])
 
  const [phoneNumberError, setPhoneNumberError] = useState('');
 
-const totalPrice = bookingData[0]?.hotel?.price * bookingData[0]?.numberOfDays
+const totalPrice = bookingData[0]?.hotel?.price * bookingData[0]?.numberOfDays;
  
 
 const [formData, setFormData] = useState({
@@ -21,6 +23,45 @@ const [formData, setFormData] = useState({
     totalPrice:null,
 });
 console.log(formData)
+
+
+const handleOrders = () => {
+    localStorage.removeItem('bookingId')
+    navigate('/orders')
+  
+}
+
+const initPayment = (data) => {
+    const options = {
+        amount: data.amount,
+        currency: data.currency,
+        name: bookingData[0]?.hotel?.hotelName,
+        description: "Test Transaction",
+        image:  "https://img.freepik.com/premium-vector/fast-play-symbol-logo-with-letter-f_45189-7.jpg?w=740" ,
+        order_id: data.id,
+        handler: async (response) => {
+            try {
+
+                const bookingId = localStorage.getItem('bookingId')
+        
+                const { data } = await axios.post(`/api/users/paymentend/${bookingId}`, response);
+                console.log(data);
+                if(data){
+                    handleOrders()
+                }
+            }  catch (error) {
+                console.log(error);
+            }
+        },
+        theme: {
+            color: "#3399cc",
+        },
+    };
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+};
+
+
 
 
 
@@ -60,6 +101,13 @@ console.log(formData)
         const response = await axios.post(`/api/users/bookingfinal/${bookingId}`,formData)
 
         console.log(response.data.data)
+
+      
+			const { data } = await axios.post('/api/users/paymentstart', { amount: totalPrice + (18/100)*totalPrice  });
+			console.log(data);
+			initPayment(data.data);
+
+
 
     }
     catch(error){
@@ -203,15 +251,15 @@ console.log(formData)
         <br />
         <div className='price-1'>
            <h6> {bookingData[0]?.roomNumber} Room x {bookingData[0]?.numberOfDays} Days</h6>
-            <div><h6>₹{totalPrice}/-</h6></div>
+            <div><h6>₹{(totalPrice).toFixed(0)  || 0 }/-</h6></div>
         </div>
         <div className='price-1'>
             <h6>Taxes & Service Fees</h6>
-            <div><h6>₹{(18/100)*totalPrice}/-</h6></div>
+            <div><h6>₹{((18/100)*totalPrice).toFixed(2)  || 0}/-</h6></div>
         </div>
         <div className='price-1'>
         <h5>Total Amount to be paid</h5>
-        <div style={{color:'#4CAF50'}}><h5>₹ {(18/100)*totalPrice + totalPrice}</h5></div>
+        <div style={{color:'#4CAF50'}}><h5>₹ {((18/100)*totalPrice + totalPrice).toFixed(2) || 0}</h5></div>
         </div>
     </div>
     <div className='payment-end'>

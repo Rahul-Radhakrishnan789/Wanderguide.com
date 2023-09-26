@@ -27,7 +27,7 @@ export const Navx = () => {
               </Nav>
               <Nav className="px-5">
                  <Nav.Link className='px-3' onClick={() => navigate('/wishlist')}><Heart size={20}/></Nav.Link>
-                <Nav.Link className='px-3'>Cart</Nav.Link>
+                <Nav.Link className='px-3' onClick={() => navigate('/orders')}>My Bookings</Nav.Link>
                 <Nav.Link onClick={() => navigate("/loginpage")} className='px-3'>Login</Nav.Link>
               </Nav>
               <Nav>

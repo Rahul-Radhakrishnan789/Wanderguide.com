@@ -11,7 +11,9 @@ import { Mapbox } from './components/Mapbox';
 import { Wishlist } from './components/Wishlist';
 import { HotelPage } from './pages/HotelPage';
 import { PaymentPage } from './pages/PaymentPage';
-
+import { Orders } from './pages/Orders';
+import { AdminCoupon } from './pages/AdminPages/AdminCouponCreate';
+import { ShowCoupons } from './pages/AdminPages/ShowCoupons';
 
 import './App.css';
 function App() {
@@ -31,6 +33,9 @@ function App() {
                  <Route path='/wishlist' element={<Wishlist/>} />
                  <Route path='/hotelpage/:paramid' element={<HotelPage/>}/>
                  <Route path='/paymentpage' element={<PaymentPage/>} />
+                 <Route path='/orders' element={<Orders/>} />
+                 <Route path='/addcoupons' element={<AdminCoupon/>} />
+                 <Route path='/showcoupons' element={<ShowCoupons/>} />
            </Routes>
       </Router>
  

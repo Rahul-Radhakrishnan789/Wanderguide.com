@@ -375,7 +375,7 @@ const latitude = hotel?.latitude || 0;
       <div key={index} className='single-review'>
         <div className='review-name-rating'>
         <p style={{marginLeft:'20px'}}><b>{review.userName}</b></p>
-        <p style={{marginRight:'10px'}}><b>Rated:</b><p style={{color:'orange'}}>{review.rating}/5</p></p>
+        <p style={{marginRight:'10px'}}><p style={{color:'orange'}}>{review.rating}/5</p></p>
         </div>
      <p  style={{marginLeft:'30px'}}>{review.review}</p>     
       </div>
