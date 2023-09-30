@@ -1,13 +1,12 @@
-import React, {  useState } from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl';
-import { MapPin } from 'phosphor-react';
-import { useDispatch } from 'react-redux';
-import { setCoordinates } from '../Redux Store/slices/coordinateSlice';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import React, { useState } from "react";
+import ReactMapGL, { Marker } from "react-map-gl";
+import { MapPin } from "phosphor-react";
+import { useDispatch } from "react-redux";
+import { setCoordinates } from "../Redux Store/slices/coordinateSlice";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 export const Mapbox = () => {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [viewport, setViewport] = useState({
     latitude: 20.5937,
@@ -18,8 +17,8 @@ export const Mapbox = () => {
   const [marker, setMarker] = useState(null);
 
   const handleMapClick = (event) => {
-    const { lngLat } = event; 
-  
+    const { lngLat } = event;
+
     if (lngLat) {
       const { lng, lat } = lngLat;
       setMarker({
@@ -28,13 +27,10 @@ export const Mapbox = () => {
       });
       dispatch(setCoordinates({ longitude: lng, latitude: lat }));
     }
-   
   };
 
-
-
   return (
-    <div style={{  height: '560px'}}>
+    <div style={{ height: "560px" }}>
       <ReactMapGL
         initialViewState={viewport}
         width="100vw"
@@ -42,10 +38,10 @@ export const Mapbox = () => {
         transitionDuration="200"
         mapboxAccessToken="pk.eyJ1IjoicmFodWxyYWRoYWtyaXNobmFuIiwiYSI6ImNsbTRwOXpqaTQ4aGIzZHRoa3g3bW1md2UifQ.0Zau3s28QwARyY1b9t73Ow"
         mapStyle="mapbox://styles/rahulradhakrishnan/clm4jf19100uu01peeobb3f1y"
-        onViewportChange={(newViewport) => {setViewport(newViewport)}}
+        onViewportChange={(newViewport) => {
+          setViewport(newViewport);
+        }}
         onClick={handleMapClick}
-       
-        
       >
         {marker ? (
           <Marker
@@ -56,12 +52,12 @@ export const Mapbox = () => {
             draggable={true}
             onDragEnd={handleMapClick}
           >
-            <div><MapPin size={22} style={{color:'red'}}/></div>
+            <div>
+              <MapPin size={22} style={{ color: "red" }} />
+            </div>
           </Marker>
-        ) : null }
+        ) : null}
       </ReactMapGL>
     </div>
   );
 };
-
-

@@ -1,14 +1,13 @@
-import React,{useState} from 'react';
-import axios from '../utils/AxiosInstance'
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import './HotelCard.css'; 
+import React, { useState } from "react";
+import axios from "../utils/AxiosInstance";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import "./HotelCard.css";
 
-export const HotelCard = ({ hotel,onDelete,onEdit }) => {
+export const HotelCard = ({ hotel, onDelete, onEdit }) => {
+  const [showEditModal, setShowEditModal] = useState(false);
 
-   const [showEditModal, setShowEditModal] = useState(false);
-
-   const [editedHotel, setEditedHotel] = useState({
+  const [editedHotel, setEditedHotel] = useState({
     hotelName: hotel.hotelName,
     location: hotel.location,
     price: hotel.price,
@@ -19,14 +18,12 @@ export const HotelCard = ({ hotel,onDelete,onEdit }) => {
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
-   
-      setEditedHotel((prev) => ({
-        ...prev,
-        [id]: value
-      }));
+
+    setEditedHotel((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
   };
-
-
 
   const handleEditClick = () => {
     setShowEditModal(true);
@@ -36,46 +33,35 @@ export const HotelCard = ({ hotel,onDelete,onEdit }) => {
     setShowEditModal(false);
   };
 
-  const handleUpdateClick = async() => {
-    try{
+  const handleUpdateClick = async () => {
+    try {
+      const updatedData = { ...editedHotel };
 
-    const updatedData = {...editedHotel};
+      await axios.put(`/api/hotelowner/updatehotel/${hotel._id}`, updatedData);
 
-    await axios.put(`/api/hotelowner/updatehotel/${hotel._id}`,updatedData)
+      onEdit(hotel._id, updatedData);
 
-    onEdit(hotel._id, updatedData);
-
-      
-        handleCloseEditModal();
-
+      handleCloseEditModal();
+    } catch (error) {
+      console.error("Error updating  hotel:", error);
+      alert("Hotel updating failed.");
     }
+  };
 
-    catch(error){
-      console.error('Error updating  hotel:', error);
-      alert('Hotel updating failed.');
+  const handleDeleteClick = async () => {
+    try {
+      await axios.delete(`/api/hotelowner/deletehotel/${hotel._id}`);
 
+      onDelete(hotel._id);
+
+      alert("Hotel deleted successfully.");
+    } catch (error) {
+      console.error("Error deleting hotel:", error);
+      alert("Hotel deletion failed.");
     }
-
-  }
-
-
-    const handleDeleteClick = async () => {
-        try {
-     
-          await axios.delete(`/api/hotelowner/deletehotel/${hotel._id}`); 
-          
-         
-          onDelete(hotel._id);
-          
-          alert('Hotel deleted successfully.');
-        } catch (error) {
-          console.error('Error deleting hotel:', error);
-          alert('Hotel deletion failed.');
-        }
-      };
+  };
   return (
-    
-    <div className="hotel-card" >
+    <div className="hotel-card">
       <div className="image-containerr">
         {hotel.images.map((image, index) => (
           <img
@@ -89,25 +75,31 @@ export const HotelCard = ({ hotel,onDelete,onEdit }) => {
       <div className="hotel-details">
         <h3>{hotel.hotelName}</h3>
         <p>
-          <strong>Location:</strong> {hotel.location}, {hotel.state}<br />
-          <strong>Price:</strong> ${hotel.price} per night<br />
-          <strong>Amenities:</strong> {hotel.amenities}<br />
-          <strong>Available Rooms:</strong> {hotel.availableRooms}<br />
+          <strong>Location:</strong> {hotel.location}, {hotel.state}
+          <br />
+          <strong>Price:</strong> ${hotel.price} per night
+          <br />
+          <strong>Amenities:</strong> {hotel.amenities}
+          <br />
+          <strong>Available Rooms:</strong> {hotel.availableRooms}
+          <br />
           <strong>Property Type:</strong> {hotel.propertyType}
         </p>
-        <div className="card-reviews">
-        </div>
+        <div className="card-reviews"></div>
         <div className="button-container">
-  <button className="edit-button" onClick={handleEditClick}>Edit</button>
-  <button className="delete-button" onClick={handleDeleteClick}>Delete</button>
-</div>
+          <button className="edit-button" onClick={handleEditClick}>
+            Edit
+          </button>
+          <button className="delete-button" onClick={handleDeleteClick}>
+            Delete
+          </button>
+        </div>
       </div>
       <Modal show={showEditModal} onHide={handleCloseEditModal}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Hotel</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-       
           <div className="form-group">
             <label htmlFor="hotelName">Hotel Name</label>
             <input
@@ -127,7 +119,7 @@ export const HotelCard = ({ hotel,onDelete,onEdit }) => {
               onChange={handleInputChange}
             />
 
-           <label htmlFor="price">price</label>
+            <label htmlFor="price">price</label>
             <input
               type="text"
               className="form-control"
@@ -144,28 +136,28 @@ export const HotelCard = ({ hotel,onDelete,onEdit }) => {
               value={editedHotel.amenities}
               onChange={handleInputChange}
             />
-              <label htmlFor="availableRooms">AvailableRooms</label>
+            <label htmlFor="availableRooms">AvailableRooms</label>
             <input
               type="text"
               className="form-control"
               id="availableRooms"
-              value={editedHotel.availableRooms} 
+              value={editedHotel.availableRooms}
               onChange={handleInputChange}
             />
 
             <label htmlFor="propertyType">PropertyType</label>
-             <select
+            <select
               className="form-control"
               id="propertyType"
               value={editedHotel.propertyType}
               onChange={handleInputChange}
-              >
-             <option value="Hotel">Hotel </option>
-             <option value="Resort">Resort </option>
-             <option value="Motel">Motel</option>
-             <option value="Guest House">Guest House</option>
-             <option value="Other">Other</option>
-             </select>
+            >
+              <option value="Hotel">Hotel </option>
+              <option value="Resort">Resort </option>
+              <option value="Motel">Motel</option>
+              <option value="Guest House">Guest House</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -177,7 +169,6 @@ export const HotelCard = ({ hotel,onDelete,onEdit }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-     
     </div>
   );
 };

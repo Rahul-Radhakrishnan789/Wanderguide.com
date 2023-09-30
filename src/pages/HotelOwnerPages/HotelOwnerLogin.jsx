@@ -1,59 +1,110 @@
-import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import Form from "react-bootstrap/Form";
+import axios from "../../utils/AxiosInstance";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { HotelOwnerHomePage } from "./HotelOwnerHomePage";
 
 export const HotelOwnerLogin = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
- 
- 
+  const [formData, setFormData] = useState({
+    phoneNumber: "+91" + "",
+  });
 
- const Navigate = useNavigate()
+  const [showOTPModal, setShowOTPModal] = useState(false);
 
-  const handleLogin = () => {
-    const envUsername = process.env.REACT_APP_USERNAME;
-    const envPassword = process.env.REACT_APP_PASSWORD ;
-    if (username === envUsername && password === envPassword) {
+  const [otp, setOTP] = useState("");
 
-      Navigate("/hotelownerhomepage")
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+
+  console.log(otp);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("/api/hoteowner/signup", formData);
+
+      console.log(response.data.data);
+
+      if (response) {
+        const OTP = response.data.data;
+
+        localStorage.setItem("OTP", OTP);
+      }
+
+      setShowOTPModal(true);
+    } catch (error) {
+      console.log("something went wrong ", error);
     }
+  };
 
-    };
+  const handleOTPSubmit = () => {
+    const OTP = localStorage.getItem("OTP");
 
+    if (OTP === otp) {
+      setShowOTPModal(false);
+      setIsLoggedIn(false);
+    }
+  };
 
-  return (
-    <div className="container mt-5" style={{ width: '400px' }}>
+  useEffect(() => {
+    const OTP = localStorage.getItem("OTP");
+    if (OTP) {
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
+    }
+  }, [isLoggedIn]);
+
+  return isLoggedIn ? (
+    <div className="container mt-5" style={{ width: "400px" }}>
       <h2>Login</h2>
       <Form>
-        <Form.Group controlId="formUsername">
-          <Form.Label>Username</Form.Label>
+        <Form.Group controlId="formPassword">
+          <Form.Label>mobile Number</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter phone Number"
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleChange}
           />
         </Form.Group>
-
-        <Form.Group controlId="formPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-       <br/>
+        <br />
         <Button variant="primary" onClick={handleLogin}>
           Login
         </Button>
       </Form>
-     
-   
+
+      <Modal show={showOTPModal} onHide={() => setShowOTPModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Enter OTP</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group controlId="formOTP">
+            <Form.Label>OTP</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter OTP"
+              value={otp}
+              onChange={(e) => setOTP(e.target.value)}
+            />
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleOTPSubmit}>
+            Submit OTP
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
+  ) : (
+    <HotelOwnerHomePage />
   );
 };
-
-

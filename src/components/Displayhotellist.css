@@ -2,7 +2,6 @@
 .hotel-image-section {
     width: 250px;
     height: 270px;
-    background: yello;
     display: flex;
     flex-direction: column;
   }
@@ -39,6 +38,7 @@
 
   .hotel-item{
     display: flex;
+    background-color: #fff;
   }
   
 
@@ -95,3 +95,4 @@
     display :flex;
 
 }
+

@@ -158,7 +158,7 @@
     border: 1px solid #d7cfcf;
     border-radius: 10px;
     margin: 5px;
-    height: 200px;
+    height: auto;
   }
   
   .review-name-rating{
