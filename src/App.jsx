@@ -15,6 +15,8 @@ import { Orders } from './pages/Orders';
 import { AdminCoupon } from './pages/AdminPages/AdminCouponCreate';
 import { ShowCoupons } from './pages/AdminPages/ShowCoupons';
 import { UserDetails } from './pages/UserDetails';
+import {AdminHomePage} from './pages/AdminPages/AdminHomePage'
+import {AdminLogin} from './pages/AdminPages/AdminLogin'
 import './App.css';
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
                  <Route path='/addcoupons' element={<AdminCoupon/>} />
                  <Route path='/showcoupons' element={<ShowCoupons/>} />
                  <Route path='/userdetails' element={<UserDetails/>} />
+                 <Route path='/adminlogin' element={<AdminLogin/>} />
+                 <Route path='/adminhome' element={<AdminHomePage/>} />
            </Routes>
       </Router>
  

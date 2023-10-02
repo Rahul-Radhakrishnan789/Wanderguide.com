@@ -30,7 +30,7 @@ export const Navx = () => {
             <Nav.Link className="px-3" onClick={() => navigate("/")}>
               Home
             </Nav.Link>
-            <Nav.Link className="px-3">Hotels</Nav.Link>
+            <Nav.Link className="px-3" onClick={() => navigate('/adminlogin')}>Admin</Nav.Link>
             <Nav.Link
               onClick={() => navigate("/hotelownerlogin")}
               className="px-3"
