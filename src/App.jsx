@@ -14,7 +14,7 @@ import { PaymentPage } from './pages/PaymentPage';
 import { Orders } from './pages/Orders';
 import { AdminCoupon } from './pages/AdminPages/AdminCouponCreate';
 import { ShowCoupons } from './pages/AdminPages/ShowCoupons';
-
+import { UserDetails } from './pages/UserDetails';
 import './App.css';
 function App() {
   return (
@@ -36,6 +36,7 @@ function App() {
                  <Route path='/orders' element={<Orders/>} />
                  <Route path='/addcoupons' element={<AdminCoupon/>} />
                  <Route path='/showcoupons' element={<ShowCoupons/>} />
+                 <Route path='/userdetails' element={<UserDetails/>} />
            </Routes>
       </Router>
  

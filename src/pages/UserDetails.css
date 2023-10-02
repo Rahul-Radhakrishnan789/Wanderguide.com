@@ -1,0 +1,12 @@
+.main-details{
+    margin-left: 20%;
+    margin-top: 5%;
+    width:60%;
+    height:auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  
+}

@@ -57,7 +57,7 @@ export const Navx = () => {
           </Nav>
           <Nav>
             {isLoggedIn ? (
-              <Nav.Link className="px-3">
+              <Nav.Link className="px-3" onClick={() => navigate('/userdetails')}>
                 <UserCircle size={32} />
               </Nav.Link>
             ) : (

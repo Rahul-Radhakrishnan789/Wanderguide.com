@@ -90,7 +90,7 @@ export const MainPage = () => {
   };
 
   return (
-    <div>
+    <div style={{margin:"20px"}}>
       <Form>
         <div
           style={{
