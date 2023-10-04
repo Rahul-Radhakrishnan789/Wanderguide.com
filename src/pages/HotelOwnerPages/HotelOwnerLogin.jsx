@@ -9,6 +9,7 @@ export const HotelOwnerLogin = () => {
   const [formData, setFormData] = useState({
     phoneNumber: "+91" + "",
   });
+  console.log(formData)
 
   const [showOTPModal, setShowOTPModal] = useState(false);
 
@@ -16,7 +17,7 @@ export const HotelOwnerLogin = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
-  console.log(otp);
+  // console.log(otp);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

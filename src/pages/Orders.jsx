@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "../utils/AxiosInstance";
+import TableContainer from "@mui/material/TableContainer";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import Button from '@mui/material/Button';
+import { useNavigate } from "react-router-dom";
 import "./Orders.css";
 
 export const Orders = () => {
   const [orderDetails, setOrderDetails] = useState([]);
+
+  const nav =  useNavigate()
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -20,37 +30,32 @@ export const Orders = () => {
   }, []);
 
   return (
-    <div className="orders-main">
-      <h4>Orders</h4>
-      <div className="orders-list">
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "1200px",
-            marginTop: "20px",
-            borderBottom: "1px solid",
-          }}
-        >
-          <h6>Order_id</h6>
-          <h6>hotelName</h6>
-          <h6>CheckIn</h6>
-          <h6>CheckOut</h6>
-          <h6>Amount</h6>
-        </div>
-        {orderDetails.map((orderData, index) => (
-          <div key={index} className="order-details">
-            <p>{orderData?.order_id}</p>
-            <p>
-              <b>{orderData?.hotel.hotelName}</b>
-            </p>
-            <p>{orderData?.checkInDate.slice(0, 10)}</p>
-            <p>{orderData?.checkOutDate.slice(0, 10)}</p>
-            <p>₹ {orderData?.totalPrice.toFixed(2)}/-</p>
-          </div>
+    <div style={{margin:'30px'}}>
+    <TableContainer >
+    <Table aria-label="User Table">
+      <TableHead>
+        <TableRow>
+          <TableCell><strong>Order ID</strong></TableCell>
+          <TableCell><strong>Hotel </strong></TableCell>
+          <TableCell><strong>Grand Total</strong></TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {orderDetails.map((order,index) => (
+          <TableRow key={index}>
+             <TableCell>{order.order_id}</TableCell>
+            <TableCell>{order?.hotel.hotelName}</TableCell>  
+            <TableCell>₹{order.totalPrice.toFixed(0)}/-</TableCell>
+          </TableRow>
         ))}
-      </div>
-    </div>
+      </TableBody>
+    </Table>
+  </TableContainer>
+  <div style={{marginLeft:'550px',marginTop:'30px'}}>
+    <Button variant="outlined" color="success" onClick={() => nav('/')}>
+        Back To Home
+      </Button>
+  </div>
+  </div>
   );
 };

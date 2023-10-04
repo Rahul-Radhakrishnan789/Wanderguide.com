@@ -12,8 +12,6 @@ import { Wishlist } from './components/Wishlist';
 import { HotelPage } from './pages/HotelPage';
 import { PaymentPage } from './pages/PaymentPage';
 import { Orders } from './pages/Orders';
-import { AdminCoupon } from './pages/AdminPages/AdminCouponCreate';
-import { ShowCoupons } from './pages/AdminPages/ShowCoupons';
 import { UserDetails } from './pages/UserDetails';
 import {AdminHomePage} from './pages/AdminPages/AdminHomePage'
 import {AdminLogin} from './pages/AdminPages/AdminLogin'
@@ -36,8 +34,6 @@ function App() {
                  <Route path='/hotelpage/:paramid' element={<HotelPage/>}/>
                  <Route path='/paymentpage' element={<PaymentPage/>} />
                  <Route path='/orders' element={<Orders/>} />
-                 <Route path='/addcoupons' element={<AdminCoupon/>} />
-                 <Route path='/showcoupons' element={<ShowCoupons/>} />
                  <Route path='/userdetails' element={<UserDetails/>} />
                  <Route path='/adminlogin' element={<AdminLogin/>} />
                  <Route path='/adminhome' element={<AdminHomePage/>} />

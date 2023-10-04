@@ -95,7 +95,7 @@ export const ShowCoupons = () => {
             style={{ display: "flex", justifyContent: "center" }}
           >
             <Card
-              style={{ width: "250px", height: "220px", margin: "40px" }}
+              style={{ width: "250px", height: "auto", margin: "40px" }}
               className={getColor(coupon.discount)}
             >
               <Card.Body>
@@ -105,10 +105,11 @@ export const ShowCoupons = () => {
                 <Card.Text>
                   Expiry Date: {coupon?.expDate.slice(0, 10)}
                 </Card.Text>
-                <Button variant="primary" onClick={() => openEditModal(coupon)}>
+              
+              </Card.Body>
+              <Button variant="primary" onClick={() => openEditModal(coupon)}>
                   Edit Coupon
                 </Button>
-              </Card.Body>
             </Card>
           </Col>
         ))}
