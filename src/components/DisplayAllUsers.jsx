@@ -10,7 +10,11 @@ import TableBody from "@mui/material/TableBody";
 import Button from '@mui/material/Button';
 
 export const DisplayAllUsers = () => {
+
+    const [updateFlag, setUpdateFlag] = useState(false)
     const [users,setUsers] =useState([])
+    
+
     console.log(users)
     
         const fetchUsers = async() => {
@@ -36,6 +40,7 @@ export const DisplayAllUsers = () => {
             const response = await axios.put(`/api/admin/blockuser/${userId}`)
 
             console.log(response.data.data)
+            setUpdateFlag(!updateFlag)
             }
             catch(error){
                 console.log('something went wrong',error)
@@ -47,11 +52,16 @@ export const DisplayAllUsers = () => {
                 const response = await axios.put(`/api/admin/unblockuser/${userId}`)
     
                 console.log(response.data.data)
+                setUpdateFlag(!updateFlag)
                 }
                 catch(error){
                     console.log('something went wrong',error)
                 }
             }
+
+            useEffect(() => {
+                fetchUsers();
+              }, [updateFlag]);
         
   return (
     <div>

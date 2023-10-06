@@ -10,6 +10,25 @@ background-position: center;
 margin: 0; 
 padding: 0; 
 } 
+
+::-webkit-scrollbar {
+  width:.75em;
+  
+}
+
+::-webkit-scrollbar-track {
+  background:inherit;
+  border-radius: 100vw;
+
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #00ffff 0%, #0066cc 81%);
+  border-radius: 100vw;
+  
+}
+
+
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;
