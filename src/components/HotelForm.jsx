@@ -180,11 +180,10 @@ export const HotelForm = () => {
           <Form.Group controlId="location">
             <Form.Label>Location</Form.Label>
             <Mapbox />
-            {/* Display the selected location */}
             <div>
               Selected Location:
               <span>
-                {/* Latitude: {formData.geoLocation.latitude}, Longitude: {formData.geoLocation.longitude} */}
+             
               </span>
             </div>
           </Form.Group>

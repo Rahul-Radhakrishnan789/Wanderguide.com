@@ -2,10 +2,37 @@ import React, { useEffect, useState } from "react";
 import { Navx } from "../components/Navbar";
 import axios from "../utils/AxiosInstance";
 import { useNavigate } from "react-router-dom";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import "./PaymentPage.css";
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+  maxHeight: '80vh',
+  overflowY: 'auto', 
+};
+
 
 export const PaymentPage = () => {
   const navigate = useNavigate();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => setOpen(false);
+
+  const [coupons,setCoupons] = useState([])
 
   const [bookingData, setBookingData] = useState([]);
 
@@ -117,6 +144,19 @@ export const PaymentPage = () => {
     }
   };
 
+  const fetchCoupons = async() => {
+    try
+    {
+    const response =await axios.get('/api/admin/displaycoupons')
+
+    setCoupons(response.data.data)
+    console.log(response.data.data)
+    }
+    catch(error){
+      console.error("error:", error);
+    }
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -139,6 +179,7 @@ export const PaymentPage = () => {
 
   useEffect(() => {
     calculateTotalPrice();
+    fetchCoupons();
   }, [bookingData]);
 
   console.log("data is", bookingData);
@@ -267,7 +308,29 @@ export const PaymentPage = () => {
                 </div>
               </div>
             </div>
-            <div className="payment-end">hi</div>
+            <div className="payment-end">
+            <Button onClick={handleOpen}>Open modal</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Coupons
+          </Typography>
+          {coupons.map((coupon) => (
+            <div key={coupon.id}>
+              <Typography variant="subtitle1">{coupon.couponId}</Typography>
+              <Typography variant="body2">-{coupon.discount}</Typography>
+              <Typography>hi</Typography>
+              <hr />
+            </div>
+          ))}
+        </Box>
+      </Modal>
+            </div>
             <button className="payment-button" onClick={handleClick}>
               Proceed To payment
             </button>
