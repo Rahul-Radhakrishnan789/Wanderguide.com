@@ -83,6 +83,11 @@
     height: 200px;
     margin-left: -40px;
     margin-top: 30px;
+    /* background-color: #0f0f0f; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .payment-button {
@@ -96,6 +101,19 @@
     background: linear-gradient(to bottom, #66ff99 0%, #6666ff 100%);
 }
 
+.grid{
+    height: "50px";
+    border-radius: 25px;
+  
+}
+
+.grid:hover{
+ cursor: pointer;
+ scale: 1.1;
+ border-radius: 25px;
+  
+
+}
 
 
   

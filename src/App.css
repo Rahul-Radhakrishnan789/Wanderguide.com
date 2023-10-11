@@ -2,7 +2,7 @@
  
  body {
 font-display: center;
-background-image: url('./assets/images/bg-4.jpg');
+/* background-image: url('./assets/images/bg-4.jpg'); */
 background-size: cover ;
 background-repeat: no-repeat;
 background-attachment: scroll;
@@ -12,7 +12,7 @@ padding: 0;
 } 
 
 ::-webkit-scrollbar {
-  width:.75em;
+  width:.35em;
   
 }
 

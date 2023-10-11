@@ -2,26 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Navx } from "../components/Navbar";
 import axios from "../utils/AxiosInstance";
 import { useNavigate } from "react-router-dom";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
 import "./PaymentPage.css";
 
-
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
+  bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
-  maxHeight: '80vh',
-  overflowY: 'auto', 
+  maxHeight: "80vh",
+  overflowY: "auto",
 };
-
 
 export const PaymentPage = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export const PaymentPage = () => {
 
   const handleClose = () => setOpen(false);
 
-  const [coupons,setCoupons] = useState([])
+  const [coupons, setCoupons] = useState([]);
 
   const [bookingData, setBookingData] = useState([]);
 
@@ -144,18 +144,16 @@ export const PaymentPage = () => {
     }
   };
 
-  const fetchCoupons = async() => {
-    try
-    {
-    const response =await axios.get('/api/admin/displaycoupons')
+  const fetchCoupons = async () => {
+    try {
+      const response = await axios.get("/api/admin/displaycoupons");
 
-    setCoupons(response.data.data)
-    console.log(response.data.data)
-    }
-    catch(error){
+      setCoupons(response.data.data);
+      console.log(response.data.data);
+    } catch (error) {
       console.error("error:", error);
     }
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -309,27 +307,76 @@ export const PaymentPage = () => {
               </div>
             </div>
             <div className="payment-end">
-            <Button onClick={handleOpen}>Open modal</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Coupons
-          </Typography>
-          {coupons.map((coupon) => (
-            <div key={coupon.id}>
-              <Typography variant="subtitle1">{coupon.couponId}</Typography>
-              <Typography variant="body2">-{coupon.discount}</Typography>
-              <Typography>hi</Typography>
-              <hr />
-            </div>
-          ))}
-        </Box>
-      </Modal>
+              <Grid container spacing={2} textAlign={"center"}>
+                <Grid item xs={6}>
+                  <div  className="grid" style={{ backgroundColor: "#ebb8ff", }}>
+                    {coupons[0]?.couponId}
+                    <br />
+                    Discount: {coupons[0]?.discount}
+                  </div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div  className="grid" style={{ backgroundColor: "#ff636a",}}>
+                    {coupons[1]?.couponId}
+                    <br />
+                    Discount: {coupons[1]?.discount}
+                  </div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div  className="grid" style={{ backgroundColor: "lightblue",  }}>
+                    {coupons[2]?.couponId}
+                    <br />
+                    Discount: {coupons[2]?.discount}
+                  </div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div className="grid"
+                    style={{ backgroundColor: "lightgreen", }}
+                  >
+                    {coupons[3]?.couponId}
+                    <br />
+                    Discount: {coupons[3]?.discount}
+                  </div>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button onClick={handleOpen}>MORE COUPONS</Button>
+                </Grid>
+              </Grid>
+
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  {coupons.map((coupon) => (
+                    <div
+                      key={coupon.id}
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        paddingTop: "15px",
+                      }}
+                    >
+                      <div>
+                        <Typography variant="subtitle1" color={"secondary"}>
+                          {coupon.couponId}
+                        </Typography>
+                        <Typography variant="body1">
+                          Discount: -{coupon.discount}
+                        </Typography>
+                        <Divider />
+                      </div>
+
+                      <div>
+                        <Button size="small">Apply</Button>
+                      </div>
+                    </div>
+                  ))}
+                </Box>
+              </Modal>
             </div>
             <button className="payment-button" onClick={handleClick}>
               Proceed To payment
