@@ -80,7 +80,7 @@ export const AdminHomePage = () => {
 
   const theme = useTheme();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const [selectedComponent, setSelectedComponent] = useState(null);
   
@@ -141,7 +141,7 @@ export const AdminHomePage = () => {
         anchor="left"
         open={open}
       >
-        <DrawerHeader>
+        <DrawerHeader >
             <h6>Manage your account</h6>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
