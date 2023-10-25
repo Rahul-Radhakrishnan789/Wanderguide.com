@@ -8,7 +8,7 @@ export const DestinationCard = ({ name, accommodations, image }) => {
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Text>{accommodations}</Card.Text>
-        </Card.Body>l
+        </Card.Body>
       </Card>
     </Col>
   );
