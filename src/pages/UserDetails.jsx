@@ -9,6 +9,8 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import { Button } from "@mui/material";
 import axios from "../utils/AxiosInstance";
 import "./UserDetails.css";
 
@@ -38,10 +40,9 @@ export const UserDetails = () => {
   }, []);
   return (
     <div className="main-details">
-      <Box
-        component="form"
+      <Box     
         sx={{
-          "& .MuiTextField-root": { m: 2.5, width: "25ch" },
+          "& .MuiTextField-root": { m:2.5, width: "25ch" },
         }}
         noValidate
         autoComplete="off"
@@ -64,7 +65,7 @@ export const UserDetails = () => {
           }}
         />
 
-        <FormControl sx={{ m: 3, minWidth: 120, marginTop: "20px" }}>
+        <FormControl sx={{  minWidth: '25ch', position:'absolute',top:'283px',left:'530px' }}>
           <InputLabel id="demo-simple-select-label">Gender</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -99,13 +100,13 @@ export const UserDetails = () => {
             readOnly: true,
           }}
         />
-
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+ 
+        <LocalizationProvider dateAdapter={AdapterDayjs} >
           <DemoContainer components={["DatePicker"]}>
             <DatePicker label="Date of Birth" defaultValue={""} />
           </DemoContainer>
         </LocalizationProvider>
-
+       
         <TextField
           id="outlined-read-only-input"
           label="City"
@@ -123,7 +124,7 @@ export const UserDetails = () => {
             readOnly: true,
           }}
         />
-
+      
         <TextField
           id="outlined-read-only-input"
           label="State"
@@ -133,6 +134,10 @@ export const UserDetails = () => {
           }}
         />
       </Box>
+      <Box sx={{  position:'relative',top:'195px',left:'-330px' }}>
+      <Button  variant="contained" color="secondary" size="large" startIcon={< ModeEditIcon/>}>EDIT</Button>
+      </Box>
+     
     </div>
   );
 };
