@@ -1,12 +1,12 @@
 import React,{useState} from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import Logo from '../../assets/images/logo4.png'
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -26,7 +26,8 @@ import { AdminCoupon } from './AdminCouponCreate';
 import { ShowCoupons } from './ShowCoupons';
 import {DisplayAllHotelOwners} from '../../components/DisplayAllHotelOwners'
 import { DisplayAllUsers } from '../../components/DisplayAllUsers';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';       
+import "./adminHomepage.css";
 
 const drawerWidth = 240;
 
@@ -96,7 +97,12 @@ export const AdminHomePage = () => {
         case 'componentD':
             return <DisplayAllUsers/>
       default:
-        return <div>Please select a component from the sidebar.</div>;
+        return <div>
+          <Box>
+          <h1>Hey... Look what have you done!</h1>
+           
+          </Box>
+        </div>;
     }
   };
 
@@ -112,10 +118,13 @@ export const AdminHomePage = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} color='success'>
+      <AppBar position="fixed" open={open} color='success'  >
+        <div className="adminnav">
+        <img src={Logo} alt="Logo" width={200} />{" "}
+        </div>
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="primary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -123,9 +132,6 @@ export const AdminHomePage = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Welcome
-          </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
